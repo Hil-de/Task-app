@@ -1,0 +1,78 @@
+<div class="center-container">
+  <div class="outer-container">
+    <div class="inner-container">
+      <div class="form-container">
+        <div class="title">
+            <h1>Mis Tareas</h1>
+        </div>
+      <div class="taskBtn-container">
+        <button class="task-btn" (click)="toggleForm()">
+          Agrega una tarea
+        </button>
+      </div>
+      <form
+        [formGroup]="taskForm"
+        *ngIf="showForm"
+        (keydown.enter)="pushtasks()"
+      >
+        <div class="formDetails">
+          <input
+          class="task-title"
+          type="text"
+          id=""
+          placeholder="Título"
+          formControlName="title"
+        />
+        <input
+          class="task-descrip"
+          name=""
+          id=""
+          placeholder="Descripción"
+          formControlName="descrip"
+        />
+        </div>
+      </form>
+    </div>
+
+    <div class="task-dump">
+        <div class="task-container">
+            <div class="task" *ngFor="let task of tasks">
+              <div class="task-details-container">
+                <div class="check-container">
+                  <input class="check" type="checkbox" (click)="estateCheck(task)" />
+                </div>
+                <div class="task-details">
+                  <span class="title">{{ task.title }}</span>
+                  <span class="descrip">{{ task.descrip }}</span>
+                </div>
+              </div>
+              <button class="btn-delete" (click)="deleteTask(task)">Borrar</button>
+            </div>
+          </div>
+      
+          <div class="completeTask-container" *ngIf="completedtasks.length > 0">
+            <div class="completedTask-title">
+              <h1>Completadas</h1>
+            </div>
+            <div class="completed-task" *ngFor="let task of completedtasks">
+              <div class="completedTask-details-container">
+                <div class="check-container">
+                  <input
+                  class="check"
+                  type="checkbox"
+                  [checked]="task.complete"
+                  (click)="estateCheck(task)"
+                />
+                </div>
+                <div class="completedTask-details">
+                  <span class="title">{{ task.title }}</span>
+                  <span class="descrip">{{ task.descrip }}</span>
+                </div>
+              </div>
+              <button class="btn-delete" (click)="deleteTask(task)">Borrar</button>
+            </div>
+          </div>
+    </div>
+    </div>
+  </div>
+</div>
